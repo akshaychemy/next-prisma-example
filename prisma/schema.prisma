@@ -8,18 +8,9 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String
-  email String  @unique
-  posts Post1[]
-}
-
-model Post1{
-  id    Int     @id @default(autoincrement())
-  title String
-  content String?
-  published Boolean @default(false)
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String   // 🔹 store hashed password
   createdAt DateTime @default(now())
-  userId Int
-  user User @relation(fields:[userId],references:[id])
 }

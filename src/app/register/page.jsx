@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function AuthPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -19,35 +19,16 @@ export default function AuthPage() {
     const data = await res.json();
     if (res.ok) {
       setMessage("Registered successfully! Redirecting to login...");
-      setTimeout(() => router.push("/login"), 1500); // redirect after 1.5 sec
+      setTimeout(() => router.push("/login"), 1500);
     } else {
       setMessage(data.error || "Registration failed");
     }
   }
 
-  async function login(e) {
-    e.preventDefault();
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      setMessage("Login successful!");
-      // e.g. redirect to dashboard
-      router.push("/dashboard");
-    } else {
-      setMessage(data.error || "Login failed");
-    }
-  }
-
   return (
     <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Auth Demo</h1>
-
-      {/* Register form */}
-      <form onSubmit={register} className="flex gap-2 mb-2">
+      <h1 className="text-2xl font-bold mb-4">Register</h1>
+      <form onSubmit={register} className="flex flex-col gap-2 mb-2 w-64">
         <input
           type="email"
           placeholder="Email"
@@ -70,37 +51,12 @@ export default function AuthPage() {
         </button>
       </form>
 
-      {/* Extra login button under register */}
       <button
         onClick={() => router.push("/login")}
-        className="text-blue-600 underline mb-4"
+        className="text-blue-600 underline"
       >
         Already have an account? Login
       </button>
-
-      {/* Login form */}
-      <form onSubmit={login} className="flex gap-2 mb-2">
-        <input
-          type="email"
-          placeholder="Email"
-          className="border px-2 py-1"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="border px-2 py-1"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-1 rounded"
-        >
-          Login
-        </button>
-      </form>
 
       {message && <p className="mt-4">{message}</p>}
     </main>

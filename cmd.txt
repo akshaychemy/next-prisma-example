@@ -1,5 +1,8 @@
 npm install @prisma/client
 npm install prisma --save-dev
+npm install bcryptjs
+npm install jsonwebtoken cookie
+
 
 
 //Run migration
@@ -7,3 +10,10 @@ npx prisma migrate dev --name second
 
 
 The fetch request is sent from the browser → Next.js API route → Prisma → DB
+
+
+
+psql -h localhost -p 5432 -U akshay -d postgres
+\du
+CREATE ROLE postgres WITH LOGIN SUPERUSER PASSWORD 'postgres';
+

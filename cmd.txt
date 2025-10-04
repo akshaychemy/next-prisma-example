@@ -1,0 +1,9 @@
+npm install @prisma/client
+npm install prisma --save-dev
+
+
+//Run migration
+npx prisma migrate dev --name second
+
+
+The fetch request is sent from the browser → Next.js API route → Prisma → DB

@@ -34,6 +34,11 @@ export default function DashboardPage() {
     fetchUser();
   }, [router]);
 
+  function handleLogout() {
+    localStorage.removeItem("token");
+    router.push("/login");
+  }
+
   if (!user) return <p className="p-6">Loading...</p>;
 
   return (
@@ -41,6 +46,13 @@ export default function DashboardPage() {
       <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
       <p>Welcome, {user.name}!</p>
       <p>Email: {user.email}</p>
+
+      <button
+        onClick={handleLogout}
+        className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
+      >
+        Logout
+      </button>
     </main>
   );
 }
